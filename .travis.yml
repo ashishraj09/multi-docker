@@ -4,20 +4,20 @@ services:
     - docker
 
 before_install:
-    - docker build -t ashraj/react-test -f ./client/Dockerfile.dev ./client
+    - docker build -t ashirahraj09/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-    - docker run -e CI=true ashraj/react-test npm run test
+    - docker run -e CI=true ashirahraj09/react-test npm run test
 
 after_success:
-    - docker build -t ashraj/multi-client ./client
-    - docker build -t ashraj/multi-nginx ./nginx
-    - docker build -t ashraj/multi-server ./server
-    - docker build -t ashraj/multi-worker ./worker
+    - docker build -t ashirahraj09/multi-client ./client
+    - docker build -t ashirahraj09/multi-nginx ./nginx
+    - docker build -t ashirahraj09/multi-server ./server
+    - docker build -t ashirahraj09/multi-worker ./worker
 
 # Log Into DOCKER CLI
     - echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password-stdin
-    - docker push ashraj/multi-client
-    - docker push ashraj/multi-nginx
-    - docker push ashraj/multi-server
-    - docker push ashraj/multi-worker
+    - docker push ashirahraj09/multi-client
+    - docker push ashirahraj09/multi-nginx
+    - docker push ashirahraj09/multi-server
+    - docker push ashirahraj09/multi-worker
