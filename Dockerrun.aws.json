@@ -2,8 +2,35 @@
     "AWSEBDockerrunVersion" : 2,
     "containerDefinitions":[
         {
-            "name": "clinet",
-            "image": ""
+            "name": "client",
+            "image": "ashirahraj09/multi-client",
+            "hostname": "client",
+            "essential" : false
+        },
+        {
+            "name": "server",
+            "image": "ashirahraj09/multi-server",
+            "hostname": "api",
+            "essential" : false
+        },
+        {
+            "name": "worker",
+            "image": "ashirahraj09/multi-worker",
+            "hostname": "worker",
+            "essential" : false
+        },
+        {
+            "name": "nginx",
+            "image": "ashirahraj09/multi-nginx",
+            "hostname": "nginx",
+            "essential" : true,
+            "portMappings":[
+                {
+                    "hostPort": 80,
+                    "containerPort":80
+                }
+            ],
+            "links":["client","server"]
         }
     ]
 }
