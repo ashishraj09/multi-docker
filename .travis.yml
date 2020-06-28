@@ -8,3 +8,16 @@ before_install:
 
 script:
     - docker run -e CI=true ashraj/react-test npm run test
+
+after_success:
+    - docker build -t ashraj/multi-client ./client
+    - docker build -t ashraj/multi-nginx ./nginx
+    - docker build -t ashraj/multi-server ./server
+    - docker build -t ashraj/multi-worker ./worker
+
+# Log Into DOCKER CLI
+    - echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password-stdin
+    - docker push ashraj/multi-client
+    - docker push ashraj/multi-nginx
+    - docker push ashraj/multi-server
+    - docker push ashraj/multi-worker
